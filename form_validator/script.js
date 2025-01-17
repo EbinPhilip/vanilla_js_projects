@@ -16,27 +16,40 @@ var submitButton = document.getElementById("submit-button");
 /** @type {NodeListOf<HTMLInputElement>} */
 var inputFields = document.querySelectorAll("input");
 
-console.log(inputFields);
+function getFieldName(/** @type {HTMLInputElement} */ inputField) {
+
+    return inputField.id.charAt(0).toUpperCase() + inputField.id.slice(1);
+}
 
 function setFormOptionFailedFromInputField(/** @type {HTMLInputElement} */ inputField,
     /** @type {string} */ errorMsg) {
 
-    var formOption = inputField.parentElement;
+    var inputContainer = inputField.parentElement;
 
+    inputContainer.className = "input-container error";
+
+    var icon = inputContainer.querySelector("span");
+    icon.textContent = '\u2715';
+
+    var formOption = inputContainer.parentElement;
     formOption.className = "form-option error";
 
     var smallText = formOption.querySelector("small");
     smallText.innerText = errorMsg;
 }
 
-function getFieldName(/** @type {HTMLInputElement} */ inputField) {
-
-    return inputField.id.charAt(0).toUpperCase() + inputField.id.slice(1);
-}
-
 function setFormOptionSuccessFromInputField(/** @type {HTMLInputElement} */ inputField) {
-    console.log("success");
-    var formOption = inputField.parentElement;
+    var inputContainer = inputField.parentElement;
+
+    inputContainer.classList.remove("success");
+    inputContainer.offsetWidth; // Force a reflow
+    inputContainer.className = "input-container success";
+
+
+    var icon = inputContainer.querySelector("span");
+    icon.textContent = '\u2713';
+
+    var formOption = inputContainer.parentElement;
     formOption.className = "form-option success";
 }
 
@@ -82,7 +95,7 @@ function validateUserName() {
 function validatePassword() {
 
     if (verifyNotEmpty(passwordField)
-        && verifyInputLengthWithinLimits(passwordField, 8, 20)) {
+        && verifyInputLengthWithinLimits(passwordField, 4, 20)) {
         return true;
     }
 
@@ -105,7 +118,7 @@ function validateConfirmPassword() {
     
     if (verifyNotEmpty(confirmPasswordField)
         && verifyPasswordsMatch()
-        && verifyInputLengthWithinLimits(confirmPasswordField, 8, 20)) {
+        && verifyInputLengthWithinLimits(confirmPasswordField, 4, 20)) {
 
         return true;
     }
