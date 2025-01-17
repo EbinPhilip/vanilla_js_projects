@@ -94,3 +94,13 @@ h2 {
     margin-top: 20px;
     width: 100%;
 }
+
+.form button:hover {
+    background-color: #6b7378;
+    border-color: solid #6b7378;
+}
+
+.form button:active {
+    background-color: #54575a;
+    border-color: 2px solid #54575a;
+}
