@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Form valildator</title>
+</head>
+<body>
+    <div class="container">
+        <form id="form" class="form">
+            <h2>Sign up</h1>
+            <div class="form-option">
+                <label for="username">Username</label>
+                <div class="input-container">
+                    <input type="text" id="username" placeholder="Enter username" />
+                    <span class="icon"></span>
+                </div>
+                <small>error</small>
+            </div>
+            <div class="form-option">
+                <label for="password">Password</label>
+                <div class="input-container">
+                    <input type="password" id="password" placeholder="Enter password" />
+                    <span class="icon"></span>
+                </div>
+                <small>error</small>
+            </div>
+            <div class="form-option">
+                <label for="confirm-password">Confirm password</label>
+                <div class="input-container">
+                    <input type="password" id="confirm-password" placeholder="Confirm password" />
+                    <span class="icon"></span>
+                </div>
+                <small>error</small>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
