@@ -8,24 +8,38 @@
 </head>
 <body>
     <h1>Tic Tac Toe</h1>
-    <div class = "row">
-        <div class = "cell">X</div>
-        <div class = "cell">X</div>
-        <div class = "cell">X</div>
-    </div>
-    <div class = "row">
-        <div class = "cell">X</div>
-        <div class = "cell">X</div>
-        <div class = "cell">X</div>
+
+        <div class="card">
+
+            <div class="card-face card-front">
+
+                <div class = "row">
+                    <div class = "cell">X</div>
+                    <div class = "cell">X</div>
+                    <div class = "cell">X</div>
+                </div>
+                <div class = "row">
+                    <div class = "cell">X</div>
+                    <div class = "cell">X</div>
+                    <div class = "cell">X</div>
+                </div>
+                <div class = "row">
+                    <div class = "cell">X</div>
+                    <div class = "cell">X</div>
+                    <div class = "cell">X</div>
+                </div>
+
+            </div>
+
+            <div class="card-face card-back">
+                <div class="game-result">You won!</div>
+                <div id="smiley">&#x1F600</div>
+                <button id="restart">Play again</button>
+            </div>
+
         </div>
-    </div>
-    <div class = "row">
-        <div class = "cell">X</div>
-        <div class = "cell">X</div>
-        <div class = "cell">X</div>
-    </div>
-    <div id="smiley">&#x1F600</div>
-    <button id="restart">Restart</button>
+    
+    
     <script src="script.js"></script>
 </body>
 </html>
