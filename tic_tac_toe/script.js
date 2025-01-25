@@ -2,8 +2,28 @@
 /** @type {Element[]} */
 const cells = Array.from(document.querySelectorAll('.cell'));
 
+const card = document.getElementById("card");
+
+const gameResult = document.getElementById("game-result");
+const smiley = document.getElementById("smiley");
+const restartButton = document.getElementById("restart");
+
 const MARK_O = true;
 const MARK_X = false;
+
+/** @type {number[]} */
+let winningCombination = null;
+
+const winningCombinations = [
+    [0, 1, 2], // Top row
+    [3, 4, 5], // Middle row
+    [6, 7, 8], // Bottom row
+    [0, 3, 6], // Left column
+    [1, 4, 7], // Middle column
+    [2, 5, 8], // Right column
+    [0, 4, 8], // Diagonal from top-left
+    [2, 4, 6]  // Diagonal from top-right
+];
 
 function getRandomIndex(max) {
     return Math.floor(Math.random() * (max));
@@ -20,6 +40,20 @@ function isFreeCellPresent() {
     }
 
     return freeCellPresent;
+}
+
+function checkWin(/** @type {Element[]} */ playerSymbol) {
+
+    return winningCombinations.some(combination=>{
+        if (combination.every(index => {
+            return cells[index].textContent === playerSymbol;
+        })) {
+            winningCombination = combination;
+            return true;
+        } else {
+            return false;
+        }
+    })
 }
 
 function markCell(
@@ -47,18 +81,56 @@ function markRandomCellWithO() {
     markCell(cells[randomIdx], MARK_O);
 }
 
+function flipCard() {
+
+    card.classList.add("flipped");
+}
+
+function endGamePlayerWon() {
+
+    smiley.textContent = `\u{1F600}`;
+    gameResult.textContent = "You won!";
+    flipCard();
+}
+
+function endGamePlayerLost() {
+
+    smiley.textContent = "\u{1F61E}";
+    gameResult.textContent = "You lost!";
+    flipCard();
+}
+
+function endGameDraw() {
+    smiley.textContent = "\u{1F610}";
+    gameResult.textContent = "It's a draw!";
+    flipCard();
+}
 
 document.querySelectorAll('.cell').forEach(cell => {
     cell.addEventListener('click', () => {
         if (!cell.classList.contains('clicked')) {
             markCell(cell, MARK_X);
 
+            if (checkWin("X")) {
+                endGamePlayerWon();
+                return;
+            }
+
 
             markRandomCellWithO();
+
+            if (checkWin("O")) {
+                endGamePlayerLost();
+                return;
+            }
+
+            if (!isFreeCellPresent()) {
+                endGameDraw();
+            }
         }
     });
 });
 
-document.getElementById("restart").addEventListener("click", () => {
+restartButton.addEventListener("click", () => {
     location.reload();
 })
