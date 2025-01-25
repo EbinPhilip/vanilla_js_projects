@@ -8,6 +8,8 @@ const gameResult = document.getElementById("game-result");
 const smiley = document.getElementById("smiley");
 const restartButton = document.getElementById("restart");
 
+let gameOver = false;
+
 const MARK_O = true;
 const MARK_X = false;
 
@@ -46,7 +48,7 @@ function checkWin(/** @type {Element[]} */ playerSymbol) {
 
     return winningCombinations.some(combination=>{
         if (combination.every(index => {
-            return cells[index].textContent === playerSymbol;
+            return cells[index].getAttribute("cell-symbol") === playerSymbol;
         })) {
             winningCombination = combination;
             return true;
@@ -62,7 +64,10 @@ function markCell(
 ) {
 
     cell.classList.add('clicked');
-    cell.textContent = shouldMarkO ? "O" : "X";
+
+    const stringToMark = shouldMarkO ? "O" : "X";
+    cell.textContent = stringToMark;
+    cell.setAttribute("cell-symbol", stringToMark);
 }
 
 function markRandomCellWithO() {
@@ -81,33 +86,50 @@ function markRandomCellWithO() {
     markCell(cells[randomIdx], MARK_O);
 }
 
-function flipCard() {
+function flipCardAndEndGame() {
 
     card.classList.add("flipped");
+    gameOver = true;
+}
+
+function highlightWinningCombination(
+    /** @type {boolean} */ didPlayerWin) {
+    
+    classToApply = didPlayerWin ? "won" : "lost";
+
+    winningCombination.forEach(cellIdx => {
+        cells[cellIdx].classList.add(classToApply);
+    })
 }
 
 function endGamePlayerWon() {
+    highlightWinningCombination(true);
 
     smiley.textContent = `\u{1F600}`;
     gameResult.textContent = "You won!";
-    flipCard();
+    flipCardAndEndGame();
 }
 
 function endGamePlayerLost() {
+    highlightWinningCombination(false);
 
     smiley.textContent = "\u{1F61E}";
     gameResult.textContent = "You lost!";
-    flipCard();
+    flipCardAndEndGame();
 }
 
 function endGameDraw() {
     smiley.textContent = "\u{1F610}";
     gameResult.textContent = "It's a draw!";
-    flipCard();
+    flipCardAndEndGame();
 }
 
 document.querySelectorAll('.cell').forEach(cell => {
     cell.addEventListener('click', () => {
+        if (gameOver) {
+            return;
+        }
+
         if (!cell.classList.contains('clicked')) {
             markCell(cell, MARK_X);
 
