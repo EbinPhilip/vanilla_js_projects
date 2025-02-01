@@ -8,10 +8,11 @@ body {
     align-items:center;
     justify-content: center;
     height: 100vh;
+    background-color: #eaeaea;
 }
 
 .card {
-    width: 300px;
+    width: 400px;
     height: 400px;
     position: relative;
     transform-style: preserve-3d; /* Enables 3D rotation */
@@ -32,7 +33,7 @@ body {
 }
 
 .card-front {
-    background-color: white;
+    background-color: #eaeaea;
 }
 
 .card-back {
@@ -48,25 +49,43 @@ body {
     display: flex;
 }
 
+.row.top {
+    border-bottom: black 4px solid;
+}
+
+.row.bottom {
+    border-top: black 4px solid;
+}
+
 .cell {
-    background-color: black;
-    border: 1px solid #333;
-    border-radius: 10px;
-    height: 100px;
-    width: 100px;
-    margin:10px;
+    height: 125px;
+    width: 125px;
+    margin:0%;
     cursor: pointer;
     font-weight: bold;
     font-size: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    color:transparent;
     font-family: 'Patrick Hand', cursive; /* Handwritten font */
 }
 
+.cell.left {
+    border-right: black 4px solid;
+}
+
+.cell.right {
+    border-left: black 4px solid;
+}
+
 .cell:hover {
-    background-color: #bbbbbb;
     color: black;
+}
+
+.cell.clicked {
+    color: black;
+    cursor: default;
 }
 
 .game-result {
@@ -94,35 +113,23 @@ body {
     background-color: #858383;
 }
 
-
-.cell.clicked {
-    background-color:#eaeaea;
-    color: black;
-    cursor: default;
+#strike-line {
+    position: absolute;
+    top:16%;
+    left:0%;
+    height: 5px;
+    width:0px;
+    transition: width 0.5s ease-in;
+    transform-origin: left center; /* Ensures it expands properly */
+    visibility: hidden;
 }
 
-.cell.won {
-    border-color:green;
-    border-width: 4px;
-    color: black;
-    animation: winning-combination-highlight 0.5s ease 0.2s forwards;
+#strike-line.won {
+    background-color: green;
+    visibility: visible;
 }
 
-.cell.lost {
-    border-color: red;
-    border-width: 4px;
-    color: black;
-    animation: winning-combination-highlight 0.5s ease 0.2s forwards;
-}
-
-@keyframes winning-combination-highlight {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.15);
-    }
-    100% {
-        transform: scale(1);
-    }
+#strike-line.lost {
+    background-color: red;
+    visibility: visible;
 }

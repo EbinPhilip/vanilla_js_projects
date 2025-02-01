@@ -1,31 +1,43 @@
+const MARK_O = true;
+const MARK_X = false;
+
+const WinningCombinationType = Object.freeze({
+    ROW: "row",
+    COLUMN: "column",
+    DIAGONAL: "diagonal",
+    OFF_DIAGONAL: "off-diagonal"
+});
+
+const winningCombinations = [
+    { indices: [0, 1, 2], type: WinningCombinationType.ROW },      // Top row
+    { indices: [3, 4, 5], type: WinningCombinationType.ROW },      // Middle row
+    { indices: [6, 7, 8], type: WinningCombinationType.ROW },      // Bottom row
+    { indices: [0, 3, 6], type: WinningCombinationType.COLUMN },   // Left column
+    { indices: [1, 4, 7], type: WinningCombinationType.COLUMN },   // Middle column
+    { indices: [2, 5, 8], type: WinningCombinationType.COLUMN },   // Right column
+    { indices: [0, 4, 8], type: WinningCombinationType.DIAGONAL }, // Top-left to bottom-right
+    { indices: [2, 4, 6], type: WinningCombinationType.OFF_DIAGONAL } // Top-right to bottom-left
+];
 
 /** @type {Element[]} */
 const cells = Array.from(document.querySelectorAll('.cell'));
 
 const card = document.getElementById("card");
+const cardFront = card.querySelector(".card-front");
 
 const gameResult = document.getElementById("game-result");
 const smiley = document.getElementById("smiley");
 const restartButton = document.getElementById("restart");
+const strikeLine = document.getElementById("strike-line");
 
 let gameOver = false;
 
-const MARK_O = true;
-const MARK_X = false;
-
-/** @type {number[]} */
+/**
+ * @typedef {Object} winningCombination
+ * @property {number[]} indices - The indices of the winning cells.
+ * @property {string} type - The type of winning combination.
+ */
 let winningCombination = null;
-
-const winningCombinations = [
-    [0, 1, 2], // Top row
-    [3, 4, 5], // Middle row
-    [6, 7, 8], // Bottom row
-    [0, 3, 6], // Left column
-    [1, 4, 7], // Middle column
-    [2, 5, 8], // Right column
-    [0, 4, 8], // Diagonal from top-left
-    [2, 4, 6]  // Diagonal from top-right
-];
 
 function getRandomIndex(max) {
     return Math.floor(Math.random() * (max));
@@ -47,7 +59,7 @@ function isFreeCellPresent() {
 function checkWin(/** @type {Element[]} */ playerSymbol) {
 
     return winningCombinations.some(combination=>{
-        if (combination.every(index => {
+        if (combination.indices.every(index => {
             return cells[index].getAttribute("cell-symbol") === playerSymbol;
         })) {
             winningCombination = combination;
@@ -92,14 +104,71 @@ function flipCardAndEndGame() {
     gameOver = true;
 }
 
+function drawStrikeLine() {
+
+    /** @type {number[]} */
+    const combination = winningCombination.indices;
+    /** @type {string} */
+    const combinationType = winningCombination.type;
+
+    const firstRect = cells[combination[0]].getBoundingClientRect();
+    const lastRect = cells[combination[2]].getBoundingClientRect();
+    const boardRect = cardFront.getBoundingClientRect();
+
+    let top, left, dx, dy;
+
+    switch (combinationType) {
+        
+        case  WinningCombinationType.ROW:
+            top = (firstRect.top + lastRect.bottom) / 2 - boardRect.top;
+            left = firstRect.left - boardRect.left;
+            dx = lastRect.right - firstRect.left;
+            dy = 0;
+            break;
+        
+        case WinningCombinationType.COLUMN:
+            top = firstRect.top - boardRect.top;
+            left = (firstRect.right + lastRect.left) / 2 - boardRect.left;
+            dx = 0;
+            dy = lastRect.bottom - firstRect.top;
+            break;
+        
+        case WinningCombinationType.DIAGONAL:
+            top = firstRect.top - boardRect.top;
+            left = firstRect.left - boardRect.left;
+            dx = lastRect.right - firstRect.left;
+            dy = lastRect.bottom - firstRect.top;
+            break;
+
+        case WinningCombinationType.OFF_DIAGONAL:
+            top = lastRect.bottom - boardRect.top;
+            left = lastRect.left - boardRect.left;
+            dx =  firstRect.right - lastRect.left;
+            dy = firstRect.top - lastRect.bottom;
+            break;
+    }
+
+    // Set position
+    strikeLine.style.top = `${top}px`;
+    strikeLine.style.left = `${left}px`;
+
+    strikeLine.style.width = `${Math.sqrt(dx * dx + dy * dy)}px`;
+
+    // Compute rotation
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+    strikeLine.style.transform = `rotate(${angle}deg)`;
+
+    // Show the strike line
+    strikeLine.style.visibility = `visible`;
+}
+
 function highlightWinningCombination(
     /** @type {boolean} */ didPlayerWin) {
     
     classToApply = didPlayerWin ? "won" : "lost";
 
-    winningCombination.forEach(cellIdx => {
-        cells[cellIdx].classList.add(classToApply);
-    })
+    drawStrikeLine();
+    strikeLine.classList.add(classToApply);
 }
 
 function endGamePlayerWon() {
@@ -137,7 +206,6 @@ document.querySelectorAll('.cell').forEach(cell => {
                 endGamePlayerWon();
                 return;
             }
-
 
             markRandomCellWithO();
 
