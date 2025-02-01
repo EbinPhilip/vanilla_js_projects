@@ -152,9 +152,6 @@ function drawStrikeLine() {
     strikeLine.style.top = `${top}px`;
     strikeLine.style.left = `${left}px`;
 
-    // Compute width
-    // const dx = lastRect.bottom - firstRect.top;
-    // const dy = lastRect.right - firstRect.left;
     strikeLine.style.width = `${Math.sqrt(dx * dx + dy * dy)}px`;
 
     // Compute rotation
@@ -209,7 +206,6 @@ document.querySelectorAll('.cell').forEach(cell => {
                 endGamePlayerWon();
                 return;
             }
-
 
             markRandomCellWithO();
 
