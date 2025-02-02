@@ -10,7 +10,10 @@ body {
 
 h1 {
     font-family: Arial, Helvetica, sans-serif;
+    margin-top: 7%;
     color: rgb(226, 214, 214);
+    justify-content: center;
+    text-align: center;
 }
 
 label {
@@ -26,14 +29,39 @@ label {
     height: 100vh;
 }
 
+.presentation-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(46, 45, 51);
+    padding:10px;
+    border: 3px double rgb(34, 33, 37);
+    border-radius: 10px;
+
+}
+
 .movie-selector {
     align-items: center;
     vertical-align: middle;
 }
 
+.movie-selector select {
+    border: none;
+    padding: 5px;
+    font-size: 12px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: whitesmoke;
+    margin-left: 4px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
 .legend {
     display: flex;
     padding: 0%;
+    margin-top:5%;
+    margin-bottom: 2%;
 }
 
 .legend li {
