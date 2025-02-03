@@ -95,4 +95,4 @@ seating.addEventListener("click", (e) => {
     }
 })
 
-updateBookingStateFromStorage();
+document.addEventListener("DOMContentLoaded", updateBookingStateFromStorage);
