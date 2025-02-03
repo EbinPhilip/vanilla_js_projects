@@ -153,3 +153,31 @@ label {
     margin-left: 20px;
 }
 
+.selection-summary {
+    display: flex;
+    vertical-align:middle;
+    align-items: center;
+    background-color: rgb(46, 45, 51);
+    padding:10px;
+    border: 3px double rgb(34, 33, 37);
+    border-radius: 10px;
+    margin: 2%;
+}
+
+.selection-summary p {
+    color:whitesmoke;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0%;
+}
+
+.selection-summary p:nth-of-type(2) {
+    margin-left: 40px;
+}
+
+.selection-summary div {
+    margin-left: 5px;
+    width: 30px;
+    background-color: whitesmoke;
+    color:black;
+    text-align: center;
+}

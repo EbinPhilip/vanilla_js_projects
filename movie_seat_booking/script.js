@@ -4,6 +4,21 @@ const seats = [...seating.querySelectorAll(".seat")];
 /** @type {HTMLSelectElement} */
 const movieSelector = document.getElementById("movie-selector");
 
+const seatSelectedCounter = document.getElementById("seat-count");
+const totalPriceCounter = document.getElementById("total-price");
+
+const movieDetailsStruct = {
+    "Kingdom of the Planet of the Apes" : {
+        price: 20
+    },
+    "Deadpool and Wolverine" : {
+        price: 40
+    },
+    "Joker: Folie a deux" : {
+        price: 30
+    },
+}
+
 function saveSeatSelection() {
     const selectedSeats = [...seating.querySelectorAll(".seat.selected")];
     
@@ -54,8 +69,22 @@ function loadSavedSeatSelection() {
     })
 }
 
-movieSelector.addEventListener("change", () => {
+function updateSelectionSumary() {
+
+    const selectedSeats = [...seating.querySelectorAll(".seat.selected")];
+    const currentSelectedMovie = movieSelector.value;
+
+    seatSelectedCounter.innerText = selectedSeats.length;
+    totalPriceCounter.innerText = selectedSeats.length * movieDetailsStruct[currentSelectedMovie].price;
+}
+
+function updateBookingStateFromStorage() {
     loadSavedSeatSelection();
+    updateSelectionSumary();
+}
+
+movieSelector.addEventListener("change", () => {
+    updateBookingStateFromStorage();
 })
 
 seating.addEventListener("click", (e) => {
@@ -71,7 +100,8 @@ seating.addEventListener("click", (e) => {
         }
 
         saveSeatSelection();
+        updateSelectionSumary();
     }
 })
 
-loadSavedSeatSelection();
+updateBookingStateFromStorage();
