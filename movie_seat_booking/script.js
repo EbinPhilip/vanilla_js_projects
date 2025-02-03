@@ -25,11 +25,7 @@ function saveSeatSelection() {
         .map((seat, index) => seat.classList.contains("selected") ? index : -1)
         .filter(index => index !== -1);
 
-    console.log("saving");
-    console.log(selectedIndices);
-
     const selectedIndicesString = JSON.stringify(selectedIndices);
-    console.log(selectedIndicesString);
     const currentSelectedMovie = movieSelector.value;
 
     localStorage.setItem(currentSelectedMovie, selectedIndicesString);
@@ -49,17 +45,11 @@ function loadSavedSeatSelection() {
     resetSeatsToUnselected();
 
     const currentSelectedMovie = movieSelector.value;
-    
-    console.log("loading selection");
-    console.log("current selection:" + currentSelectedMovie);
 
     const selectedIndicesString = localStorage.getItem(currentSelectedMovie);
     if (selectedIndicesString == null) {
-        console.log("storage not found");
         return;
     }
-
-    console.log(selectedIndicesString);
 
     /** @type {number[]} */
     const selectedIndices = JSON.parse(selectedIndicesString);
