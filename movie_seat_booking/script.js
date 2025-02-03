@@ -19,14 +19,11 @@ const movieDetailsStruct = {
     },
 }
 
-function saveSeatSelection() {
-    const selectedSeats = [...seating.querySelectorAll(".seat.selected")];
-    
-    const selectedIndices = []
-    selectedSeats.forEach(seat => {
-        const index = seats.indexOf(seat);
-        selectedIndices.push(index);
-    })
+function saveSeatSelection() {    
+
+    const selectedIndices = seats
+        .map((seat, index) => seat.classList.contains("selected") ? index : -1)
+        .filter(index => index !== -1);
 
     console.log("saving");
     console.log(selectedIndices);
