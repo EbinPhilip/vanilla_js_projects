@@ -41,7 +41,10 @@ function saveSeatSelection() {
 function resetSeatsToUnselected() {
 
     seats.forEach((seat)=>{
-        seat.classList.remove("selected");
+        if (seat.classList.contains("selected")) {
+            seat.classList.remove("selected");
+            seat.classList.add("available")
+        }
     })
 }
 
@@ -97,6 +100,7 @@ seating.addEventListener("click", (e) => {
             target.classList.add("available");
         } else {
             target.classList.add("selected");
+            target.classList.remove("available")
         }
 
         saveSeatSelection();
