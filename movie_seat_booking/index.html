@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie seat booking</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <h1>Cinema Ticket Booking</h1>
+    
+    <div class="content">
+
+        <div class="presentation-area">
+
+            <div class="movie-selector">
+                <label>Select movie:</label>
+                <select id="movie-selector">
+                    <option>Kingdom of the Planet of the Apes</option>
+                    <option>Deadpool and Wolverine</option>
+                    <option>Joker: Folie a deux</option>
+                </select>
+            </div>
+            
+            <ul class="legend">
+                <li>
+                    <div class="seat available"></div>
+                    <label>Available</label>
+                </li>
+                <li>
+                    <div class="seat occupied"></div>
+                    <label>Occupied</label>
+                </li>
+                <li>
+                    <div class="seat selected"></div>
+                    <label>Selected</label>
+                </li>
+            </ul>
+        
+        </div>
+
+        <div class="cinema-layout">
+            
+            <div class="screen">
+            </div>
+
+            <div id="seating" class="seating">
+                <div class="seat-row">
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                </div>
+                <div class="seat-row">
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                </div>
+                <div class="seat-row">
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                </div>
+                <div class="seat-row">
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                </div>
+                <div class="seat-row">
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                </div>
+                <div class="seat-row">
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                </div>
+                <div class="seat-row">
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat available"></div>
+                    <div class="seat occupied"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="selection-summary">
+            <p>Seats selected: <div id="seat-count">0</div></p>
+            <p>Total price: <div id="total-price">0</div></p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
