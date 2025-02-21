@@ -110,12 +110,17 @@ label {
 
 .screen {
     margin-top: 10%;
-    width: 300px;
+    width: 267px;
     height: 150px;
     background-color: whitesmoke;
     transform: rotateX(-45deg);
     box-shadow: 0 3px 10px rgba(204, 198, 198, 0.7);
     margin-bottom: 5%;
+}
+
+#player {
+    width: inherit;
+    height: inherit;
 }
 
 .seat-row {
