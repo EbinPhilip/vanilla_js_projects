@@ -3,19 +3,26 @@ const seats = [...seating.querySelectorAll(".seat")];
 
 /** @type {HTMLSelectElement} */
 const movieSelector = document.getElementById("movie-selector");
+/** @type {HTMLIFrameElement} */
+const videoPlayer = document.getElementById("player");
 
 const seatSelectedCounter = document.getElementById("seat-count");
 const totalPriceCounter = document.getElementById("total-price");
 
+const videoPlayerUrlQueryParams = `?&autoplay=1&mute=1&loop=1&controls=0`;
+
 const movieDetailsStruct = {
     "Kingdom of the Planet of the Apes" : {
-        price: 20
+        price: 20,
+        url:"https://www.youtube.com/embed/XtFI7SNtVpY?si=xbAT_Zjt1oPFbPdv"
     },
     "Deadpool and Wolverine" : {
-        price: 40
+        price: 40,
+        url: `https://www.youtube.com/embed/73_1biulkYk?si=ZqHBYSryxwz0E6vg`
     },
     "Joker: Folie a deux" : {
-        price: 30
+        price: 30,
+        url: "https://www.youtube.com/embed/_OKAwz2MsJs?si=ntZ7ZhEZVCnQxD-V"
     },
 }
 
@@ -67,14 +74,36 @@ function updateSelectionSumary() {
     seatSelectedCounter.innerText = selectedSeats.length;
     totalPriceCounter.innerText = selectedSeats.length * movieDetailsStruct[currentSelectedMovie].price;
 }
+ 
+function getVideoPlayerUrl(movieName) {
 
-function updateBookingStateFromStorage() {
+    if (movieDetailsStruct[movieName].url == null) {
+        return null;
+    }
+
+    return movieDetailsStruct[movieName].url 
+            + videoPlayerUrlQueryParams;
+}
+
+function setMovieTrailer() {
+    const selectedMovie = movieSelector.value;
+    const movieUrl = getVideoPlayerUrl(selectedMovie)
+    if (movieUrl != null) {
+        videoPlayer.src = movieUrl;
+        videoPlayer.style.visibility = "visible";
+    } else {
+        videoPlayer.style.visibility = "hidden";
+    }
+}
+
+function updatePageToSelectedMovie() {
     loadSavedSeatSelection();
     updateSelectionSumary();
+    setMovieTrailer();
 }
 
 movieSelector.addEventListener("change", () => {
-    updateBookingStateFromStorage();
+    updatePageToSelectedMovie();
 })
 
 seating.addEventListener("click", (e) => {
@@ -95,4 +124,4 @@ seating.addEventListener("click", (e) => {
     }
 })
 
-document.addEventListener("DOMContentLoaded", updateBookingStateFromStorage);
+document.addEventListener("DOMContentLoaded", updatePageToSelectedMovie);
