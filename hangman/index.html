@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman</title>
     <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
 </head>
 
 <body>
@@ -15,7 +21,7 @@
     <div class="game">
 
         <div id="game-container" class="game-container">
-            
+
 
             <svg id="figure" class="figure" height="250" width="200">
 
@@ -26,43 +32,57 @@
                 <line x1="20" y1="230" x2="100" y2="230" />
 
                 <!-- Head -->
-                <circle cx="140" cy="70" r="20" class="figure-part" />
+                <circle id="head" cx="140" cy="70" r="20" class="figure-part" />
                 <!-- Body -->
-                <line x1="140" y1="90" x2="140" y2="150" class="figure-part" />
+                <line id="body" x1="140" y1="90" x2="140" y2="150" class="figure-part" />
                 <!-- Arms -->
-                <line x1="140" y1="120" x2="120" y2="100" class="figure-part" />
-                <line x1="140" y1="120" x2="160" y2="100" class="figure-part" />
+                <line id="r-arm" x1="140" y1="120" x2="120" y2="100" class="figure-part" />
+                <line id="l-arm" x1="140" y1="120" x2="160" y2="100" class="figure-part" />
                 <!-- Legs -->
-                <line x1="140" y1="150" x2="120" y2="180" class="figure-part" />
-                <line x1="140" y1="150" x2="160" y2="180" class="figure-part" />
+                <line id="r-leg" x1="140" y1="150" x2="120" y2="180" class="figure-part" />
+                <line id="l-leg" x1="140" y1="150" x2="160" y2="180" class="figure-part" />
 
             </svg>
 
             <div id="wrong-letters-container" class="wrong-letters-container">
                 <p>Wrong letters</p>
-                <div id="wrong-letters"></div>
+                <div id="wrong-letters">
+                    <span class="letter-box"><span class="letter">a</span></span>
+                    <span class="letter-box"><span class="letter">a</span></span>
+                    <span class="letter-box"><span class="letter">a</span></span>
+                    <span class="letter-box"><span class="letter">a</span></span>
+                    <span class="letter-box"><span class="letter">a</span></span>
+                    <span class="letter-box"><span class="letter">a</span></span>
+                </div>
             </div>
-
-            <div id="word">
-
-            </div>
-
         </div>
 
-        <div class="result-card">
-
-            <div class="result">
-                <p>You won</p>
-                <p>&#x1F600</p>
-                <button>Play again</button>
-            </div>
-
+        <div class="wordbox" id="word">
+            <span class="letter-box"><span class="letter highlight"></span></span>
+            <span class="letter-box"><span class="letter highlight">a</span></span>
+            <span class="letter-box"><span class="letter">a</span></span>
+            <span class="letter-box"><span class="letter">a</span></span>
+            <span class="letter-box"><span class="letter">a</span></span>
+            <span class="letter-box"><span class="letter highlight">a</span></span>
         </div>
 
     </div>
 
     <div class="notification">
         <p>You have already entered this letter</p>
+    </div>
+
+    <div class="result-card">
+
+        <div class="result">
+            <button id="result-close" class="close-btn" id="modal-close-btn"><i class="fa fa-times"></i></button>
+            <h1 class="title">Correct</h1>
+            <div class="cta-section">
+                <p class="smiley">&#x1F600</p>
+                <button class="restart">Restart</button>
+            </div>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
