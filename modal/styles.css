@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+:root {
+    --modal-duration: 0.5s;
+    --primary-color: #45454b;
+    --secondary-color: #d1d1d1;
+    --highlight-color: #5c5c61;
+}
+
+* {
+    box-sizing: border-box;
+    font: leto;
+}
+
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    transition: transform 0.3s ease;
+    background-color: var(--secondary-color);
+}
+
+body.show-side-bar {
+    transform: translateX(200px);
+    margin: 0;
+}
+
+.side-menu {
+    background-color: var(--primary-color);
+    position: fixed;
+    height: 100vh;
+    width: 200px;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%)
+}
+
+.side-menu .dp {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.side-menu .dp img {
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+    transition: transform 0.3s ease;
+}
+
+.side-menu .dp img:hover {
+    transform: scale(1.2);
+}
+
+.side-menu .options {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+}
+
+.side-menu .options li {
+    border-bottom: 2px solid rgba(200, 200, 200, 0.1);
+    padding: 20px;
+    padding-left: 30px;
+}
+
+.side-menu .options li:first-of-type {
+    border-top: 2px solid rgba(200, 200, 200, 0.1);
+}
+
+.side-menu .options li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.side-menu .options li:hover {
+    background-color: var(--highlight-color);
+    cursor: pointer;
+}
+
+.content-container {
+    position: relative;
+    transition: transform 0.3s ease;
+    height: 100vh;
+}
+
+.sidebar-toggle {
+    position: absolute;
+    top: 5%;
+    background: var(--secondary-color);
+    border: none;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border-left: none;
+    width: 20px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    padding: 0;
+    font-size: 1.2rem;
+    z-index: 1000;
+}
+
+.sidebar-toggle:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar-toggle i {
+    color: var(--primary-color);
+    transition: transform 0.1s ease-in;
+    transform: rotate(180deg);
+}
+
+.sidebar-toggle:hover {
+    font-size: 1.5rem;
+}
+
+.show-side-bar .sidebar-toggle {
+    transform: translateX(-20px) rotate(180deg);
+}
+
+header {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 130%;
+    position: relative;
+    padding: 40px 15px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin: 30px 0;
+}
+
+.cta-btn {
+    background-color: var(--secondary-color);
+    border:0;
+    border-radius: 5px;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 12px 30px;
+    font-size: 20px;
+}
+
+.cta-btn:hover {
+    background-color: #e4e4ee;
+}
+
+.modal-container {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    animation: modalopen var(--modal-duration) ease-in;
+}
+
+.modal-container.show-modal {
+    display: block;
+}
+
+.modal {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    width: 400px;
+}
+
+.modal-header {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 15px;
+    margin: 0;
+    border-bottom: 1px solid #333;
+}
+
+.modal-content {
+    padding: 20px;
+  }
+
+.modal-form label {
+    display: block;
+    margin: 7px 0px;
+}
+
+.modal-form .form-input {
+    padding:8px;
+    width:100%;
+    border: none;
+}
+
+.modal-form input:focus {
+    outline:1px solid var(--primary-color);
+}
+
+.modal-form .submit-btn {
+    background-color: var(--primary-color);
+    border:0;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px 10px;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+.modal .close-btn {
+    position:absolute;
+    top: 10px;
+    right:10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 25px;
+    background:transparent;
+    border:none;
+    border-radius: 20%;
+    background-color: var(--highlight-color);
+    transition: 0.3s ease;
+}
+
+.modal .close-btn:hover {
+    transform: scale(1.3);
+}
+
+
+@keyframes modalopen {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }

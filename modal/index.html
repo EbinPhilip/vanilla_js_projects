@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal and Menu</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+</head>
+<body class="">
+    <nav class="side-menu">
+        <div class="dp">
+            <img src="https://randomuser.me/api/portraits/men/7.jpg" alt="user">
+        </div>
+        <ul class="options">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Services</a></li>
+        </ul>
+    </nav>
+    <div class="content-container">
+        <button id="sidebar-toggle" class="sidebar-toggle">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <header class="header">  
+            <h1>My Blog</h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit, nisi!</p>
+            <button class="cta-btn" id="sign-up">Sign up</button>
+        </header>
+    </div>
+    <div class="modal-container" id="modal-container">
+        <div class="modal" id="modal">
+            <button class="close-btn" id="modal-close-btn"><i class="fa fa-times"></i></button>
+            <h3 class="modal-header">Sign up</h3>
+            <div class="modal-content">
+                <form class="modal-form">
+                    <div>
+                        <label for="name">Name</label>
+                        <input
+                          type="text"
+                          id="name"
+                          placeholder="Enter Name"
+                          class="form-input"
+                        />
+                      </div>
+                      <div>
+                        <label for="email">Email</label>
+                        <input
+                          type="email"
+                          id="email"
+                          placeholder="Enter Email"
+                          class="form-input"
+                        />
+                      </div>
+                      <div>
+                        <label for="password">Password</label>
+                        <input
+                          type="password"
+                          id="password"
+                          placeholder="Enter Password"
+                          class="form-input"
+                        />
+                      </div>
+                      <div>
+                        <label for="password2">Confirm Password</label>
+                        <input
+                          type="password"
+                          id="password2"
+                          placeholder="Confirm Password"
+                          class="form-input"
+                        />
+                      </div>
+                      <input type="submit" value="Submit" class="submit-btn" />
+                </form>
+            </div>
+        </div>
+       
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
