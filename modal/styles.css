@@ -217,6 +217,10 @@ header p {
     margin-top: 15px;
 }
 
+.modal-form .submit-btn:hover {
+    outline: 1px solid var(--primary-color);
+}
+
 .modal .close-btn {
     position:absolute;
     top: 10px;
