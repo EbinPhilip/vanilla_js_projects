@@ -2,9 +2,6 @@ import { AppContext } from "./appcontext.js";
 import { LetterBox } from "./letterbox.js";
 import { WrongLetters } from "./wrongletters.js";
 
-
-/** @type {string[]} */
-const charsEntered = [];
 /** @type {string} */
 const currentWord = await fetchWordsByLength(10);
 
@@ -38,30 +35,29 @@ document.addEventListener('keypress', (event) => {
         return;
     }
 
-    if (!charsEntered.includes(char)) {
-        charsEntered.push(char);
+    if (wordBoxService.hasCharacter(char)) {
+        wordBoxService.bounceIfPresent(char);
+        toastService.showToast()
+    } else if (wrongLettersService.hasCharacter(char)) {
+        wrongLettersService.bounce(char);
+        toastService.showToast()
+    } else {
         if (currentWord.includes(char)) {
             wordBoxService.addCharacter(char);
         } else {
             wrongLettersService.addLetter(char)
             figureService.displayNextPart()
         }
-    } else {
-        if (currentWord.includes(char)) {
-            wordBoxService.bounceIfPresent(char);
-        } else {
-            wrongLettersService.bounce(char)
-        }
-        toastService.showToast()
     }
 
     if (figureService.isHanged()) {
         gameOver = true;
         resultCardService.showFailure(currentWord);
-        wordBoxService.highlightMissingCharacters();
+        wordBoxService.revealAndHighlightMissing();
     } else if (wordBoxService.isWordCompleted()) {
         gameOver = true;
         resultCardService.showSuccess(currentWord)
     }
 });
 
+console.log("started");

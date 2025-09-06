@@ -73,7 +73,7 @@ export class WordBox {
         }
     }
 
-    highlightMissingCharacters() {
+    revealAndHighlightMissing() {
         for(let i = 0; i < this.letters.length; i++) {
             if (this.letters[i].getCharacter() === '') {
                 this.letters[i].setCharacter(this.word[i])
@@ -84,5 +84,15 @@ export class WordBox {
 
     isWordCompleted() {
         return this.charsAdded === this.word.length;
+    }
+
+    hasCharacter(charToCheck) {
+        for (let i = 0; i < this.letters.length; ++i) {
+            if (this.letters[i].getCharacter() === charToCheck) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

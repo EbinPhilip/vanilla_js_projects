@@ -44,4 +44,14 @@ export class WrongLetters {
             letter.bounce();
         }
     }
+
+    hasCharacter(charToFind) {
+        for(let i = 0; i < this.letters.length; ++i) {
+            if (this.letters[i].getCharacter() === charToFind) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
