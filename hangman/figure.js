@@ -16,7 +16,7 @@ export class Figure {
     }
 
     displayNextPart() {
-        if (this.isFullyDisplayed()) {
+        if (this.isHanged()) {
             console.log("all parts displayed");
             return;
         }
@@ -25,7 +25,7 @@ export class Figure {
         part.setAttribute('style', 'display: inherit')
     }
 
-    isFullyDisplayed() {
+    isHanged() {
         return this.parts.length === 0;
     }
 }

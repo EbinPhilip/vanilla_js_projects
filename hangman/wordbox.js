@@ -24,8 +24,8 @@ export class WordBox {
         /** @type {LetterBox[]} */
         this.letters = [];
        
-        this.#initWordBox();
         this.charsAdded = 0;
+        this.#initWordBox();
 
         this.addCharacter(this.word[0]);
     }
@@ -34,6 +34,9 @@ export class WordBox {
         for (let i = 0; i < this.word.length; ++i) {
             const isSpaceChar = this.word[i] === " "            
             const letterBox = new LetterBox(isSpaceChar?" ": "", !isSpaceChar);
+            if (isSpaceChar) {
+                this.charsAdded++;
+            }
             this.letters.push(letterBox);
         }
 
@@ -53,18 +56,24 @@ export class WordBox {
         }
 
         for(let i = 0; i < this.letters.length; i++) {
-            if (this.word[i] === charToAdd) {
+            if (this.word[i] === charToAdd && this.letters[i].getCharacter() === '') {
                 this.letters[i].setCharacter(charToAdd);
                 this.charsAdded++;
             }
         }
+
+        console.log("", this.charsAdded);
     }
 
     bounceIfPresent(charToBounce) {
         for(let i = 0; i < this.letters.length; i++) {
             if (this.letters[i].getCharacter() === charToBounce) {
-                this.letters[i].bounce()
+                this.letters[i].bounce();
             }
         }
+    }
+
+    isWordCompleted() {
+        return this.charsAdded === this.word.length;
     }
 }

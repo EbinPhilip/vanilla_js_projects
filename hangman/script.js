@@ -16,6 +16,9 @@ const wrongLettersService = appContext.getServices().wrongLettersService;
 const wordBoxService = appContext.getServices().wordBoxService;
 const toastService = appContext.getServices().toastService;
 const figureService = appContext.getServices().figureService;
+const resultCardService = appContext.getServices().resultCardService;
+
+let gameOver = false;
 
 async function fetchWordsByLength(length = 10) {
     const url = `https://random-words-api.kushcreates.com/api?language=en&length=${length}&words=1`;
@@ -26,6 +29,10 @@ async function fetchWordsByLength(length = 10) {
 }
 
 document.addEventListener('keypress', (event) => {
+    if (gameOver) {
+        return;
+    }
+
     const char = event.key.toLowerCase();
     if (!/^[a-z]$/.test(char)) {
         return;
@@ -46,6 +53,14 @@ document.addEventListener('keypress', (event) => {
             wrongLettersService.bounce(char)
         }
         toastService.showToast()
+    }
+
+    if (figureService.isHanged()) {
+        gameOver = true;
+        resultCardService.showFailure(currentWord);
+    } else if (wordBoxService.isWordCompleted()) {
+        gameOver = true;
+        resultCardService.showSuccess(currentWord)
     }
 });
 
