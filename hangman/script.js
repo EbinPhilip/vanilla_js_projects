@@ -3,14 +3,17 @@ import { LetterBox } from "./letterbox.js";
 import { WrongLetters } from "./wrongletters.js";
 
 
-const appContext = new AppContext()
-
+/** @type {string[]} */
 const charsEntered = [];
+/** @type {string} */
 const currentWord = await fetchWordsByLength(10);
 
 console.log(currentWord);
 
+const appContext = new AppContext(currentWord)
+
 const wrongLettersService = appContext.getServices().wrongLettersService;
+const wordBoxService = appContext.getServices().wordBoxService;
 const toastService = appContext.getServices().toastService;
 
 async function fetchWordsByLength(length = 10) {
@@ -18,20 +21,29 @@ async function fetchWordsByLength(length = 10) {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Error: ${res.status}`);
     const data = await res.json(); 
-    return data.map(item => item.word);
+    return data.map(item => item.word)[0];
 }
 
 document.addEventListener('keypress', (event) => {
     const char = event.key.toLowerCase();
-    console.log("", char);
-    if (/^[a-z]$/.test(char)) {
-        if (!charsEntered.includes(char)) {
-            charsEntered.push(char);
+    if (!/^[a-z]$/.test(char)) {
+        return;
+    }
+
+    if (!charsEntered.includes(char)) {
+        charsEntered.push(char);
+        if (currentWord.includes(char)) {
+            wordBoxService.addCharacter(char);
+        } else {
             wrongLettersService.addLetter(char)
+        }
+    } else {
+        if (currentWord.includes(char)) {
+            wordBoxService.bounceIfPresent(char);
         } else {
             wrongLettersService.bounce(char)
-            toastService.showToast()
         }
+        toastService.showToast()
     }
 });
 
