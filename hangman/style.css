@@ -57,6 +57,10 @@ body {
     stroke-width: 4px;
 }
 
+.figure-part {
+    display: none;
+}
+
 .wordbox {
     display: flex;
 }
@@ -82,13 +86,6 @@ body {
     font-weight: bold;
     margin: 0;
 }
-
-/* .letter-box .letter.highlight {
-    display: inline-block;
-    transform: scale(1.5) translateY(-1px);
-    color:red;
-    transition: ;
-} */
 
 .letter-box .letter.bounce {
     display: inline-block;

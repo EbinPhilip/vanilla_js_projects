@@ -15,6 +15,7 @@ const appContext = new AppContext(currentWord)
 const wrongLettersService = appContext.getServices().wrongLettersService;
 const wordBoxService = appContext.getServices().wordBoxService;
 const toastService = appContext.getServices().toastService;
+const figureService = appContext.getServices().figureService;
 
 async function fetchWordsByLength(length = 10) {
     const url = `https://random-words-api.kushcreates.com/api?language=en&length=${length}&words=1`;
@@ -36,6 +37,7 @@ document.addEventListener('keypress', (event) => {
             wordBoxService.addCharacter(char);
         } else {
             wrongLettersService.addLetter(char)
+            figureService.displayNextPart()
         }
     } else {
         if (currentWord.includes(char)) {
