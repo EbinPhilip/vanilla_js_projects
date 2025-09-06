@@ -73,6 +73,15 @@ export class WordBox {
         }
     }
 
+    highlightMissingCharacters() {
+        for(let i = 0; i < this.letters.length; i++) {
+            if (this.letters[i].getCharacter() === '') {
+                this.letters[i].setCharacter(this.word[i])
+                this.letters[i].highlight();
+            }
+        }
+    }
+
     isWordCompleted() {
         return this.charsAdded === this.word.length;
     }

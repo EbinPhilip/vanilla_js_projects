@@ -58,6 +58,7 @@ document.addEventListener('keypress', (event) => {
     if (figureService.isHanged()) {
         gameOver = true;
         resultCardService.showFailure(currentWord);
+        wordBoxService.highlightMissingCharacters();
     } else if (wordBoxService.isWordCompleted()) {
         gameOver = true;
         resultCardService.showSuccess(currentWord)

@@ -57,6 +57,14 @@ export class LetterBox {
         this.letterSpan.addEventListener('animationend', handleAnimationEnd);
     }
 
+    highlight() {
+        this.letterSpan.classList.add('highlight');
+    }
+
+    removeHighlight() {
+        this.letterSpan.classList.remove('highlight');
+    }
+
     #repaint() {
         this.element.offsetHeight;
     }
