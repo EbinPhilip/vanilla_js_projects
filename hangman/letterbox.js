@@ -8,35 +8,40 @@ export class LetterBox {
 
     createElement() {
         /** @type {HTMLSpanElement} */
-        const letterSpan = document.createElement("span")
-        letterSpan.className = "letter"
-        letterSpan.textContent = this.letter
+        const letterSpan = document.createElement("span");
+        letterSpan.className = "letter";
+        letterSpan.textContent = this.letter;
 
         /** @type {HTMLSpanElement} */
-        const letterBox = document.createElement("span")
-        letterBox.className = "letter-box"
+        const letterBox = document.createElement("span");
+        letterBox.className = "letter-box";
         letterBox.appendChild(letterSpan)
         if (this.underlineOn) {
-            letterBox.classList.add("bg")
+            letterBox.classList.add("bg");
         }
         
-        return [letterBox, letterSpan]
+        return [letterBox, letterSpan];
     }
 
     getElement() {
-        return this.element
+        return this.element;
     }
 
     getCharacter() {
-        return this.letter
+        return this.letter;
+    }
+
+    setCharacter(character) {
+        this.letter = character;
+        this.letterSpan.textContent = this.letter;
+        this.#repaint();
     }
 
     bounce() {
          // If already animating, restart the animation
          if (this.isAnimating) {
             this.letterSpan.classList.remove("bounce");
-            // // Force reflow
-            this.letterSpan.offsetHeight;
+            this.#repaint();
         }
 
         this.isAnimating = true;
@@ -50,5 +55,9 @@ export class LetterBox {
         };
         
         this.letterSpan.addEventListener('animationend', handleAnimationEnd);
+    }
+
+    #repaint() {
+        this.element.offsetHeight;
     }
 }
