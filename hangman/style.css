@@ -29,7 +29,7 @@ body {
 .game-container {
     display: inherit;
     position: relative;
-    padding: 20px 30px;
+    padding: 0px;
     height: 350px;
     width: 360px;
 }
@@ -63,10 +63,10 @@ body {
     width: 15px;
     height: 40px;
     line-height: 40px;
+    margin: 0 2px;
 }
 
-.wordbox .letter-box {
-    margin: 0 3px;
+.letter-box.bg {
     border-bottom: 1px solid #beb8b8;
 }
 
@@ -77,10 +77,39 @@ body {
     margin: 0 3px;
 }
 
-.letter-box .letter.highlight {
+/* .letter-box .letter.highlight {
     display: inline-block;
-    transform: scale(1.5);
+    transform: scale(1.5) translateY(-1px);
     color:red;
+    transition: ;
+} */
+
+.letter-box .letter.bounce {
+    display: inline-block;
+    animation: bounce-highlight 0.5s ease-out;
+}
+
+@keyframes bounce-highlight {
+    0%, 100% { 
+        transform: scale(1) translateY(0);
+        color: var(--text-color);
+    }
+    25% { 
+        transform: scale(1.1) translateY(-1px);
+        color: rgb(244, 227, 196);
+    }
+    50% { 
+        transform: scale(1.1) translateY(-5px);
+        color: wheat;
+    }
+    75% { 
+        transform: scale(1.1) translateY(5px);
+        color: rgb(244, 227, 196);
+    }
+    20%, 80% {
+        transform: scale(1.1);
+        color: rgb(243, 233, 214);
+    }
 }
 
 .result-card {
@@ -162,4 +191,29 @@ body {
     transform: scale(1.2);
     background-color: var(--background-color);
     color: wheat;
+}
+
+.notification {
+    position: fixed;
+    bottom: -100px;
+    margin: 25px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+    align-items: center;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: bottom 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+}
+
+.notification.show {
+    bottom:0px;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.notification p {
+    margin: 0;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: rgb(12, 12, 12);
 }
