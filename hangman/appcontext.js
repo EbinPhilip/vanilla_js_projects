@@ -1,4 +1,5 @@
 import { Figure } from "./figure.js";
+import { ResultCard } from "./result.js";
 import { Toast } from "./toast.js";
 import { WordBox } from "./wordbox.js";
 import { WrongLetters } from "./wrongletters.js";
@@ -16,6 +17,8 @@ export class AppContext {
             wordBoxService: undefined,
             /** @type {Figure} */
             figureService: undefined,
+            /** @type {ResultCard} */
+            resultCardService: undefined,
         }
         this.registerDomElements();
         this.registerServices();
@@ -26,6 +29,7 @@ export class AppContext {
         this.toastElement = document.getElementById("notification");
         this.wordBoxElement = document.getElementById("word");
         this.figureElement = document.getElementById("figure");
+        this.resultCardElement = document.getElementById("result");
     }
 
     registerServices() {
@@ -33,6 +37,7 @@ export class AppContext {
         this.services.toastService = new Toast(this.toastElement);
         this.services.wordBoxService = new WordBox(this.wordBoxElement, this.word);
         this.services.figureService = new Figure(this.figureElement);
+        this.services.resultCardService = new ResultCard(this.resultCardElement)
     }
 
     getServices() {
