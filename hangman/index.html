@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+</head>
+
+<body>
+    <h1>Hangman</h1>
+
+    <p>Enter a letter to guess the word</p>
+    <div class="game">
+
+        <div id="game-container" class="game-container">
+
+
+            <svg id="figure" class="figure" height="250" width="200">
+
+                <!-- Pole -->
+                <line x1="60" y1="20" x2="140" y2="20" />
+                <line x1="140" y1="20" x2="140" y2="50" />
+                <line x1="60" y1="20" x2="60" y2="230" />
+                <line x1="20" y1="230" x2="100" y2="230" />
+
+                <!-- Head -->
+                <circle id="head" cx="140" cy="70" r="20" class="figure-part" />
+                <!-- Body -->
+                <line id="body" x1="140" y1="90" x2="140" y2="150" class="figure-part" />
+                <!-- Arms -->
+                <line id="r-arm" x1="140" y1="120" x2="120" y2="100" class="figure-part" />
+                <line id="l-arm" x1="140" y1="120" x2="160" y2="100" class="figure-part" />
+                <!-- Legs -->
+                <line id="r-leg" x1="140" y1="150" x2="120" y2="180" class="figure-part" />
+                <line id="l-leg" x1="140" y1="150" x2="160" y2="180" class="figure-part" />
+
+            </svg>
+
+            <div id="wrong-letters-container" class="wrong-letters-container">
+                <p>Wrong letters</p>
+                <div id="wrong-letters">
+                </div>
+            </div>
+        </div>
+
+        <div class="wordbox" id="word">
+        </div>
+
+    </div>
+
+    <div class="notification" id="notification">
+        <p>You have already entered this letter</p>
+    </div>
+
+    <div class="result-card">
+
+        <div class="result" id="result">
+            <button id="result-close" class="close-btn" id="modal-close-btn"><i class="fa fa-times"></i></button>
+            <h1 class="title" id="result-title">Great job!</h1>
+            <p class="answer-text">The correct answer is:</p>
+            <p class="answer" id="result-answer">answer</p>
+            <div class="cta-section">
+                <p id="smiley" class="smiley">&#x1F600</p>
+                <button id="restart-btn" class="restart">Restart</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
